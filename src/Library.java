@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class Library {
 
 
-  public static void sortBookList() throws FileNotFoundException {
+  public static ArrayList<Book> sortBookList() throws FileNotFoundException {
+    ArrayList<Book> BkList = new ArrayList<Book>();
     try {
 
       File menu = new File("textFiles/bookList.txt");
@@ -22,8 +23,6 @@ public class Library {
       BufferedReader buff = new BufferedReader(reader);
 
       String line = null;
-
-      ArrayList<Book> BkList = new ArrayList<>();
 
       while ((line = buff.readLine()) != null) {
 
@@ -36,7 +35,6 @@ public class Library {
 
         // Add object to list
         BkList.add(bkitem);
-        //System.out.println("Title:  "+ "\u001B[34m"+ data[0]+ "   "+"\u001B[0m"+ " Author:  " + "\u001B[35m"+data[1]+"\u001B[0m"+ "");
         //System.out.println(bkitem.getDueDate());
       }
 
@@ -46,6 +44,7 @@ public class Library {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return BkList;
   }
 
   private static boolean convertStringToBoolean(String datum) {
