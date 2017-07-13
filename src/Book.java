@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -6,6 +7,7 @@ import java.util.*;
  */
 public class Book {
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd YYYY");
     private String title;
     private String author;
     private boolean status;
@@ -51,11 +53,14 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", status=" + status +
-                ", dueDate=" + dueDate +
-                '}';
+        String state = new String();
+        if (isStatus() == true) state = "on";
+        else state = "off";
+
+        return  title + "," +
+                author + "," +
+                state + "," +
+                dueDate.format(formatter)
+                ;
     }
 }

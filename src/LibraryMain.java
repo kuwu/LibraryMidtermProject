@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -11,11 +12,20 @@ public class LibraryMain {
 
     //assuming Book(title, author, boolean, LocalDate)
     public static void main(String[] args) {
+        /*
         Scanner scan = new Scanner(System.in);
-        ArrayList<Book> books = Library.sortBookList();
-        System.out.println("Welcome to the M.K.R. Library! ");
-        System.out.println("What do you want to do? Use numbers to navigate: ");
-        
+        try {
+            ArrayList<Book> books = Library.sortBookList();
+            System.out.println("Welcome to the Bookworms' Library! ");
+            System.out.println("What do you want to do? Use numbers to navigate: ");
+        }  catch (FileNotFoundException e) {
+            ;
+        } */
+        Book b = new Book("Title", "Author", true, LocalDate.now());
+        Book c = new Book("Title", "Author", false, LocalDate.now().plusWeeks(2));
+
+        System.out.println(b);
+        System.out.println(c);
     }
 
     public static void searchTitleKeyword(ArrayList<Book> books, String keyword) {
