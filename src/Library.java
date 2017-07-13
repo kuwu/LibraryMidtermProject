@@ -15,7 +15,7 @@ public class Library {
   public static void sortBookList() throws FileNotFoundException {
     try {
 
-      File menu = new File("bookList.txt");
+      File menu = new File("textFiles/bookList.txt");
 
       FileReader reader = new FileReader(menu);
 
@@ -36,7 +36,7 @@ public class Library {
 
         // Add object to list
         BkList.add(bkitem);
-        System.out.println("Title:  "+ "\u001B[34m"+ data[0]+ "   "+"\u001B[0m"+ " Author:  " + "\u001B[35m"+data[1]+"\u001B[0m"+ "");
+        //System.out.println("Title:  "+ "\u001B[34m"+ data[0]+ "   "+"\u001B[0m"+ " Author:  " + "\u001B[35m"+data[1]+"\u001B[0m"+ "");
         //System.out.println(bkitem.getDueDate());
       }
 
