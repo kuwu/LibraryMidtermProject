@@ -1,14 +1,21 @@
+import java.util.ArrayList;
+
 /**
- * Created by kuwu on 2017/07/12.
+ * Created by KMR on 2017/07/12.
  */
 public class LibraryMain {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
+        // display()
+        // addBook()
+        // searchAuthor()
+        // searchTitleKeyword()
+        // checkoutBook()
+        // returnBook()
+    }
 
-
-    System.out.println("Hello World!");
-    System.out.println("Hello from Richard.");
-
-  }
+    public void display(ArrayList<Book> books){
+        
+    }
 
 }
