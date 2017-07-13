@@ -19,6 +19,29 @@ public class LibraryMain {
         // returnBook()
     }
 
+    public void searchTitleKeyword(ArrayList<Book> books, String keyword) {
+        System.out.println("The books with that keyword in their title:");
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getTitle().indexOf(keyword) != -1) {
+                System.out.println((i+1) + "- " + books.get(i).getTitle() + " by" + books.get(i).getAuthor());
+            }
+        }
+        System.out.println();
+        System.out.println("Anything else?");
+    }
+
+    public void searchAuthor(ArrayList<Book> books, String author) {
+        System.out.println("The books made by that author:");
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getAuthor().indexOf(author) != -1) {
+                System.out.println((i+1) + "- " + books.get(i).getTitle() + " by" + books.get(i).getAuthor());
+            }
+        }
+        System.out.println();
+        System.out.println("Anything else?");
+    }
+
+
     public void display(ArrayList<Book> books, String status){
         System.out.println("Here's a list of all of our " + status + "books:");
         for (int i = 0; i < books.size(); i++) {
