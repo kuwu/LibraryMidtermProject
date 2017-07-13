@@ -12,13 +12,16 @@ public class LibraryMain {
     //assuming Book(title, author, boolean, LocalDate)
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to the M.K.R. Library! ");
+        System.out.println("What do you want to do? Use numbers to navigate: ");
 
-        ArrayList<Book> books = new ArrayList<Book>();
         books.add(new Book("Billy's Adventures", "Bully Billy", true, LocalDate.now()));
         books.add(new Book("Anna's Adventures", "Astral Anna", false, LocalDate.now()));
-        checkoutBook(books.get(1));
-        checkoutBook(books.get(0));
-        display(books, "");
+        returnBook(books.get(1));
+        returnBook(books.get(0));
+        addBook(scan, books);
+        display(books, "current");
+
     }
 
     public static void searchTitleKeyword(ArrayList<Book> books, String keyword) {
@@ -45,7 +48,7 @@ public class LibraryMain {
 
 
     public static void display(ArrayList<Book> books, String status){
-        System.out.println("Here's a list of all of our " + status + " books:");
+        System.out.println("Here's a list of all of our current books:");
         for (int i = 0; i < books.size(); i++) {
             System.out.print((i+1) + " - " + books.get(i).getTitle() + " by " + books.get(i).getAuthor() + ", ");
             if(books.get(i).isStatus() == true) {
@@ -82,10 +85,10 @@ public class LibraryMain {
     public static void returnBook(Book book) {
         // if book status is true, then it's on shelf.
         if (book.isStatus())
-            System.out.println("That book is already on shelf in our library!");
+            System.out.println("Your selected book is already on shelf in our library!");
         else {
             book.setStatus(true);
-            System.out.println("You returned this book in " + ChronoUnit.DAYS.between(book.getDueDate(), LocalDate.now()) + " day(s).");
+            System.out.println("You returned " + book.getTitle() + " in " + ChronoUnit.DAYS.between(book.getDueDate(), LocalDate.now()) + " day(s).");
         }
     }
 
