@@ -1,6 +1,9 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /**
  * Created **MKR**
@@ -9,64 +12,64 @@ import java.util.Scanner;
 public class Library {
 
 
-  //writeToFile();
-  //readFromFile();
-  //readBookList();
-
-
-  public static void readBookList() throws FileNotFoundException {
-    Scanner scan = new Scanner(new File("bookList.txt"));
-    ArrayList<String> bk = new ArrayList<>();
-
-    while (scan.hasNextLine())
-      bk.add(scan.nextLine());
-    for (int i = 1; i < 4; ++i) {
-      // add book getter  bk.add(String.get*****(i));
-
-      System.out.println(bk.get(i));
-//      System.out.println(bk.get(1));
-//      System.out.println(bk.get(2));
-//      System.out.println(bk.get(3));
-
-    }
-
-  }
-
-  public static void writeToFile() {
+  public static void sortBookList() throws FileNotFoundException {
     try {
-      Scanner scan = new Scanner(System.in);
-      FileWriter writer = new FileWriter("bookList.txt", true);
-      System.out.println("When adding a book, use the Following format: Title|Author|Status|DueDate|");
-      System.out.println("Enter a book: ");
-      String input = scan.nextLine();
-      writer.write("\n" + input);
-      System.out.println("Your book has been saved!\n");
-      writer.close();
+
+      File menu = new File("bookList.txt");
+
+      FileReader reader = new FileReader(menu);
+
+      BufferedReader buff = new BufferedReader(reader);
+
+      String line = null;
+
+      ArrayList<Book> BkList = new ArrayList<>();
+
+      while ((line = buff.readLine()) != null) {
+
+        // Split line to extract individual fields
+
+        String[] data = line.split(",");
+
+        // Create new book item object
+        Book bkitem = new Book(data[0], data[1], true, convertStingToDate(data[3]));
+
+        // Add object to list
+        BkList.add(bkitem);
+        System.out.println("Title:  "+ "\u001B[34m"+ data[0]+ "   "+"\u001B[0m"+ " Author:  " + "\u001B[35m"+data[1]+"\u001B[0m"+ "");
+        //System.out.println(bkitem.getDueDate());
+      }
+
+      System.out.println();
+      buff.close();
 
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  public static void readFromFile() {
-    try {
+  private static boolean convertStringToBoolean(String datum) {
+    String on = " ";
+    if (datum.equalsIgnoreCase(on))
+      return true;
+    else {
 
-      File countries = new File("bookList.txt");
-      FileReader reader = new FileReader(countries);
-      BufferedReader buff = new BufferedReader(reader);
-
-      String line = null;
-
-      while ((line = buff.readLine()) != null) {
-        System.out.println(line);
-
-      }
-      buff.close();
-      System.out.println();
-    } catch (Exception e) {
-      e.printStackTrace();
     }
+    return false;
   }
+
+  public static LocalDate convertStingToDate(String datum) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
+    LocalDate date;
+
+    try {
+      date = LocalDate.parse(datum, formatter);
+    } catch (DateTimeParseException exc) {
+      throw exc;
+    }
+    return date;
+  }
+
 
 }
 
