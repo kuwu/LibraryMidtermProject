@@ -69,6 +69,19 @@ public class Library {
     return date;
   }
 
+//  public static void rewriteToBookList() {
+//    ArrayList<Book> BkList = new ArrayList<>();
+//
+//    try {
+//      FileWriter writer = new FileWriter("bookList.txt");
+//      for (Book b : BkList) {
+//        writer.write(String.valueOf(b));
+//      }
+//
+//  } catch(
+//  IOException e)
+//  {e.printStackTrace();
+//  }
+  }
 
-}
 
