@@ -12,16 +12,10 @@ public class LibraryMain {
     //assuming Book(title, author, boolean, LocalDate)
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        ArrayList<Book> books = Library.sortBookList();
         System.out.println("Welcome to the M.K.R. Library! ");
         System.out.println("What do you want to do? Use numbers to navigate: ");
-
-        books.add(new Book("Billy's Adventures", "Bully Billy", true, LocalDate.now()));
-        books.add(new Book("Anna's Adventures", "Astral Anna", false, LocalDate.now()));
-        returnBook(books.get(1));
-        returnBook(books.get(0));
-        addBook(scan, books);
-        display(books, "current");
-
+        
     }
 
     public static void searchTitleKeyword(ArrayList<Book> books, String keyword) {
