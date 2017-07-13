@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Created by michelhayman on 7/12/17.
@@ -8,7 +8,7 @@ public class Book {
     private String title;
     private String author;
     private boolean status;
-    private Date dueDate;
+    private LocalDate dueDate;
 
     public String getTitle() {
         return title;
@@ -34,14 +34,15 @@ public class Book {
         this.status = status;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
-    public Book (String title, String author, boolean status, Date dueDate) {
+
+    public Book(String title, String author, boolean status, LocalDate dueDate) {
         this.title = title;
         this.author = author;
         this.status = status;
