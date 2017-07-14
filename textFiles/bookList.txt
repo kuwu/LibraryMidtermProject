@@ -3,7 +3,7 @@ Dark Tower,Stephen King,on,07 13 2017
 Tales of a Fourth Grade Nothing,Judy Blume,on,07 13 2017
 Tools of Titan,Timothy Ferriss,on,07 13 2017
 I love you Stinky Face,Lisa Mccourt,on,07 13 2017
-Deathly Hollows,J. K. Rowling,on,07 13 2017
+Deathly Hollows,J. K. Rowling,off,07 28 2017
 Bible,God,on,07 13 2017
 Foundation,Issac Asimov,on,07 13 2017
 Colossus: The Forbin Project,D. F. Jones,on,07 13 2017
