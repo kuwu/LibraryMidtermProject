@@ -39,12 +39,12 @@ public class LibraryMain {
                         break;
                     case 3:
                         display(books);
-                        //Lots happening in this line. We get a valid number from user, -1 to align with our 0-based arrays in java, and then use .get(number) to pull that book.
+                        //Lots happening in this line. We get a valid number from user, -1 to align with our 0-based arrays in java, and then use .get(number) to checkout that book.
                         checkoutBook(books.get(LibraryValidator.getInt(scan, "What book would you like to check out?", 1, books.size()) - 1));
                         break;
                     case 4:
                         display(books);
-                        //very similar to above case. Just return a book instead.
+                        //very similar to above case. Just returning a book instead.
                         returnBook(books.get(LibraryValidator.getInt(scan, "What book would you like to return?", 1, books.size()) - 1));
                         break;
                     case 5:
@@ -55,6 +55,7 @@ public class LibraryMain {
                 }
                 System.out.println();
                 System.out.println("Anything else?");
+                System.out.println();
             } while (select != 6);
             // once user has selected save & quit, we save and get outta here.
             save(books);
@@ -66,7 +67,8 @@ public class LibraryMain {
     public static void searchTitleKeyword(ArrayList<Book> books, String keyword) {
         System.out.println("The books with that keyword in their title:");
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+            if (books.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                    books.get(i).getTitle().toLowerCase().replaceAll("\\s+","").contains(keyword.toLowerCase())) {
                 System.out.println(books.get(i).getTitle() + " by " + books.get(i).getAuthor() + " at position #" + (i + 1));
             }
         }
@@ -75,7 +77,8 @@ public class LibraryMain {
     public static void searchAuthor(ArrayList<Book> books, String author) {
         System.out.println("The books made by authors fitting your search criteria:");
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).getAuthor().toLowerCase().contains(author.toLowerCase())) {
+                if (books.get(i).getAuthor().toLowerCase().contains(author.toLowerCase()) ||
+                        books.get(i).getAuthor().toLowerCase().replaceAll("\\s+","").contains(author.toLowerCase())) {
                 System.out.println(books.get(i).getTitle() + " by " + books.get(i).getAuthor() + " at position #" + (i + 1));
             }
         }
