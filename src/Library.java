@@ -12,76 +12,75 @@ import java.util.ArrayList;
 public class Library {
 
 
-  public static ArrayList<Book> sortBookList() throws FileNotFoundException {
-    ArrayList<Book> BkList = new ArrayList<Book>();
-    try {
+    public static ArrayList<Book> sortBookList() throws FileNotFoundException {
+        ArrayList<Book> BkList = new ArrayList<Book>();
+        try {
 
-      File menu = new File("textFiles/bookList.txt");
+            File menu = new File("textFiles/bookList.txt");
 
-      FileReader reader = new FileReader(menu);
+            FileReader reader = new FileReader(menu);
 
-      BufferedReader buff = new BufferedReader(reader);
+            BufferedReader buff = new BufferedReader(reader);
 
-      String line = null;
+            String line = null;
 
-      while ((line = buff.readLine()) != null) {
+            while ((line = buff.readLine()) != null) {
 
-        // Split line to extract individual fields
+                // Split line to extract individual fields
 
-        String[] data = line.split(",");
+                String[] data = line.split(",");
 
-        // Create new book item object
-        Book bkitem = new Book(data[0], data[1], true, convertStingToDate(data[3]));
+                // Create new book item object
+                Book bkitem = new Book(data[0], data[1], true, convertStingToDate(data[3]));
 
-        // Add object to list
-        BkList.add(bkitem);
-        //System.out.println(bkitem.getDueDate());
-      }
+                // Add object to list
+                BkList.add(bkitem);
+                //System.out.println(bkitem.getDueDate());
+            }
 
-      System.out.println();
-      buff.close();
+            System.out.println();
+            buff.close();
 
-    } catch (IOException e) {
-      e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return BkList;
     }
-    return BkList;
-  }
 
-  private static boolean convertStringToBoolean(String datum) {
-    String on = " ";
-    if (datum.equalsIgnoreCase(on))
-      return true;
-    else {
+    private static boolean convertStringToBoolean(String datum) {
+        String on = " ";
+        if (datum.equalsIgnoreCase(on))
+            return true;
+        else {
 
+        }
+        return false;
     }
-    return false;
-  }
 
-  public static LocalDate convertStingToDate(String datum) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
-    LocalDate date;
+    public static LocalDate convertStingToDate(String datum) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM dd yyyy");
+        LocalDate date;
 
-    try {
-      date = LocalDate.parse(datum, formatter);
-    } catch (DateTimeParseException exc) {
-      throw exc;
+        try {
+            date = LocalDate.parse(datum, formatter);
+        } catch (DateTimeParseException exc) {
+            throw exc;
+        }
+        return date;
     }
-    return date;
-  }
 
-//  public static void rewriteToBookList() {
-//    ArrayList<Book> BkList = new ArrayList<>();
-//
-//    try {
-//      FileWriter writer = new FileWriter("bookList.txt");
-//      for (Book b : BkList) {
-//        writer.write(String.valueOf(b));
-//      }
-//
-//  } catch(
-//  IOException e)
-//  {e.printStackTrace();
-//  }
-  }
+    public static void rewriteToBookList(ArrayList<Book> BkList) {
+        try {
+            File list = new File("textFiles/bookList.txt");
+            FileWriter writer = new FileWriter(list);
+            for (Book b : BkList) {
+                writer.write(String.valueOf(b));
+            }
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 

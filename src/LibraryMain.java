@@ -10,52 +10,83 @@ import java.util.Scanner;
 
 public class LibraryMain {
 
-    //assuming Book(title, author, boolean, LocalDate)
     public static void main(String[] args) {
-        /*
-        Scanner scan = new Scanner(System.in);
-        try {
-            ArrayList<Book> books = Library.sortBookList();
-            System.out.println("Welcome to the Bookworms' Library! ");
-            System.out.println("What do you want to do? Use numbers to navigate: ");
-        }  catch (FileNotFoundException e) {
-            ;
-        } */
-        Book b = new Book("Title", "Author", true, LocalDate.now());
-        Book c = new Book("Title", "Author", false, LocalDate.now().plusWeeks(2));
 
-        System.out.println(b);
-        System.out.println(c);
+        Scanner scan = new Scanner(System.in);
+        // force initialize
+        ArrayList<Book> books = null;
+        try {
+            books = Library.sortBookList();
+            System.out.println("Welcome to the Bookworms' Library! ");
+            System.out.println("What do you want to do? Use numbers to navigate. ");
+            int select = 0;
+            do {
+                select = LibraryValidator.getInt(scan, "1: Display List\n2: Search\n3: Checkout a book\n4: Return a book\n" +
+                        "5: Add a book\n6: Save and Quit", 1, 6);
+                switch (select) {
+                    case 1:
+                        display(books);
+                        break;
+                    case 2:
+                        // That validator function will only allow 1 or 2 to be returned. If not 1, it'll be 2.
+                        if (LibraryValidator.getInt(scan, "Search by... \n1 - Author \n2 - Title Keyword", 1, 2) == 1) {
+                            System.out.println("Type part or all of the Author's name.\n");
+                            searchAuthor(books, scan.nextLine());
+                        } else {
+                            System.out.println("Type part or all of a Title you're looking for.\n");
+                            searchTitleKeyword(books, scan.nextLine());
+                        }
+                        break;
+                    case 3:
+                        display(books);
+                        //Lots happening in this line. We get a valid number from user, -1 to align with our 0-based arrays in java, and then use .get(number) to pull that book.
+                        checkoutBook(books.get(LibraryValidator.getInt(scan, "What book would you like to check out?", 1, books.size()) - 1));
+                        break;
+                    case 4:
+                        display(books);
+                        //very similar to above case. Just return a book instead.
+                        returnBook(books.get(LibraryValidator.getInt(scan, "What book would you like to return?", 1, books.size()) - 1));
+                        break;
+                    case 5:
+                        addBook(scan, books);
+                        break;
+                    case 6:
+                        continue;
+                }
+                System.out.println();
+                System.out.println("Anything else?");
+            } while (select != 6);
+            // once user has selected save & quit, we save and get outta here.
+            save(books);
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find Library list of books. Looks like we're closed for now.");
+        }
     }
 
     public static void searchTitleKeyword(ArrayList<Book> books, String keyword) {
         System.out.println("The books with that keyword in their title:");
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                System.out.println((i+1) + " - " + books.get(i).getTitle() + " by " + books.get(i).getAuthor());
+                System.out.println(books.get(i).getTitle() + " by " + books.get(i).getAuthor() + " at position #" + (i + 1));
             }
         }
-        System.out.println();
-        System.out.println("Anything else?");
     }
 
     public static void searchAuthor(ArrayList<Book> books, String author) {
-        System.out.println("The books made by that author:");
+        System.out.println("The books made by authors fitting your search criteria:");
         for (int i = 0; i < books.size(); i++) {
             if (books.get(i).getAuthor().toLowerCase().contains(author.toLowerCase())) {
-                System.out.println((i+1) + " - " + books.get(i).getTitle() + " by " + books.get(i).getAuthor());
+                System.out.println(books.get(i).getTitle() + " by " + books.get(i).getAuthor() + " at position #" + (i + 1));
             }
         }
-        System.out.println();
-        System.out.println("Anything else?");
     }
 
 
-    public static void display(ArrayList<Book> books, String status){
+    public static void display(ArrayList<Book> books) {
         System.out.println("Here's a list of all of our current books:");
         for (int i = 0; i < books.size(); i++) {
-            System.out.print((i+1) + " - " + books.get(i).getTitle() + " by " + books.get(i).getAuthor() + ", ");
-            if(books.get(i).isStatus() == true) {
+            System.out.print((i + 1) + " - " + books.get(i).getTitle() + " by " + books.get(i).getAuthor() + ", ");
+            if (books.get(i).isStatus() == true) {
                 System.out.println("currently on-shelf.");
             } else {
                 System.out.println("currently checked out. Due date is: " + books.get(i).getDueDate());
@@ -69,7 +100,7 @@ public class LibraryMain {
         System.out.println("Who was the Author?");
         String author = scan.nextLine();
         books.add(new Book(title, author, true, LocalDate.now()));
-        int index = books.size()-1;
+        int index = books.size() - 1;
         System.out.println("Added " + books.get(index).getTitle() + " by " + books.get(index).getAuthor());
     }
 
@@ -89,12 +120,23 @@ public class LibraryMain {
     public static void returnBook(Book book) {
         // if book status is true, then it's on shelf.
         if (book.isStatus())
-            System.out.println("Your selected book is already on shelf in our library!");
+            System.out.println("You're attempting to return a book that is already on shelf in our library!");
         else {
             book.setStatus(true);
-            System.out.println("You returned " + book.getTitle() + " in " + ChronoUnit.DAYS.between(book.getDueDate(), LocalDate.now()) + " day(s).");
+            if (ChronoUnit.DAYS.between(book.getDueDate(), LocalDate.now()) < 0)
+                System.out.println("You returned " + book.getTitle() + " in a timely manner. Thanks!");
+            else
+                System.out.println("You returned " + book.getTitle() + " in " + ChronoUnit.DAYS.between(book.getDueDate(), LocalDate.now()) + " day(s).");
+            if (ChronoUnit.DAYS.between(book.getDueDate(), LocalDate.now()) > 14)
+                System.out.println("You're late returning this! Expect an overdue fine.");
         }
     }
 
+    public static void save(ArrayList<Book> books) {
+        System.out.println("Changes to our library have been saved.");
+        System.out.println("Thanks for using the Bookworms' Library!");
+        //Pass our list of books back to Library to rewrite to file.
+        Library.rewriteToBookList(books);
+    }
 
 }

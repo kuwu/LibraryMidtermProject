@@ -51,6 +51,9 @@ public class Book {
         this.dueDate = dueDate;
     }
 
+    // toString will print in format
+    // title,author,(on/off)state,MM dd YYYY
+    // this is the same format that we're reading in from the text file!
     @Override
     public String toString() {
         String state = new String();
