@@ -8,5 +8,5 @@ Bible,God,on,07 13 2017
 Foundation,Issac Asimov,on,07 13 2017
 Colossus: The Forbin Project,D. F. Jones,on,07 13 2017
 The Average American Male,Chad Kultgen,on,07 13 2017
-Prisoner of Askaban,J. K. Rowling,on,07 13 2017
+Prisoner of Askaban,J. K. Rowling,off,06 28 2017
 Four Blind Mice,James Patterson,on,07 13 2017

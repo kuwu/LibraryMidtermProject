@@ -31,7 +31,7 @@ public class Library {
                 String[] data = line.split(",");
 
                 // Create new book item object
-                Book bkitem = new Book(data[0], data[1], true, convertStingToDate(data[3]));
+                Book bkitem = new Book(data[0], data[1], convertStringToBoolean(data[2]), convertStingToDate(data[3]));
 
                 // Add object to list
                 BkList.add(bkitem);
@@ -48,13 +48,7 @@ public class Library {
     }
 
     private static boolean convertStringToBoolean(String datum) {
-        String on = " ";
-        if (datum.equalsIgnoreCase(on))
-            return true;
-        else {
-
-        }
-        return false;
+        return(datum.equalsIgnoreCase("on"));
     }
 
     public static LocalDate convertStingToDate(String datum) {
@@ -73,9 +67,11 @@ public class Library {
         try {
             File list = new File("textFiles/bookList.txt");
             FileWriter writer = new FileWriter(list);
+            BufferedWriter buff = new BufferedWriter(writer);
             for (Book b : BkList) {
-                writer.write(String.valueOf(b));
+                buff.write(String.valueOf(b));
             }
+            buff.close();
         } catch (
                 IOException e) {
             e.printStackTrace();

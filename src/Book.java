@@ -63,7 +63,7 @@ public class Book {
         return  title + "," +
                 author + "," +
                 state + "," +
-                dueDate.format(formatter)
+                dueDate.format(formatter) + "\n"
                 ;
     }
 }
