@@ -13,7 +13,7 @@ public class LibraryMain {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        // force initialize
+        // force initialize the arraylist so compiler doesn't throw error.
         ArrayList<Book> books = null;
         try {
             books = Library.sortBookList();

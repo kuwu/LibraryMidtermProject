@@ -64,7 +64,7 @@ public class Library {
         }
         return date;
     }
-
+    //rewrites the ArrayList of books back to our txt file when session is over.
     public static void rewriteToBookList(ArrayList<Book> BkList) {
         try {
             File list = new File("textFiles/bookList.txt");
@@ -79,7 +79,7 @@ public class Library {
             e.printStackTrace();
         }
     }
-
+    // allows searching for part or all of a title's name, also ignores spaces when necessary
     public static void searchTitleKeyword(ArrayList<Book> books, String keyword) {
         System.out.println("The books with that keyword in their title:");
         for (int i = 0; i < books.size(); i++) {
@@ -89,7 +89,7 @@ public class Library {
             }
         }
     }
-
+    // allows searching for part or all of an author's name, also ignores spaces when necessary
     public static void searchAuthor(ArrayList<Book> books, String author) {
         System.out.println("The books made by authors fitting your search criteria:");
         for (int i = 0; i < books.size(); i++) {
@@ -100,6 +100,7 @@ public class Library {
         }
     }
 
+    //displays a list of books
     public static void display(ArrayList<Book> books) {
         System.out.println("Here's a list of all of our current books:");
         for (int i = 0; i < books.size(); i++) {
@@ -112,6 +113,7 @@ public class Library {
         }
     }
 
+    //adding a book.
     public static void addBook(Scanner scan, ArrayList<Book> books) {
         System.out.println("Alright, a new book. What's the title?");
         String title = scan.nextLine();
@@ -149,7 +151,7 @@ public class Library {
                 System.out.println("You're late returning this! Expect an overdue fine.");
         }
     }
-
+    // just for outputting and calling rewriteToBookList.
     public static void save(ArrayList<Book> books) {
         System.out.println("Changes to our library have been saved.");
         System.out.println("Thanks for using the Bookworms' Library!");
